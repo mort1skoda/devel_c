@@ -6,7 +6,7 @@
 // Morty Hawk 2023-03-28 22:15 - Tuesday, Helgeroa
 
 int main(){
-	printf(" /dat.mnt/dev.c/dev.c.xlib/01my_X_hw_test \n");
+	printf("  /dat.mnt/dev.c/dev.c.xlib/01my_X_hw_test \n");
 	//printf("in f int main()\n");
 	//int ret;
 	//ret = 0;
