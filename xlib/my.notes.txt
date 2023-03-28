@@ -1,0 +1,9 @@
+Composite Overlay Window
+           Version 0.3 of the protocol adds the Composite Overlay Window, which provides compositing managers with a surface on which to draw without interference. This
+           window is always above normal windows and is always below the screen saver window. It is an InputOutput window whose width and height are the screen dimensions.
+           Its visual is the root visual and its border width is zero. Attempts to redirect it using the composite extension are ignored. This window does not appear in
+           the reply of the QueryTree request. It is also an override redirect window. These last two features make it invisible to window managers and other X11 clients.
+           The only way to access the XID of this window is via the CompositeGetOverlayWindow request. Initially, the Composite Overlay Window is unmapped.
+
+from man XComposite(3)
+
