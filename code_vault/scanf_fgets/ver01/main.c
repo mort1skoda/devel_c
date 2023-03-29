@@ -6,12 +6,18 @@
 // Morty Hawk 2023-03-29 Wed 18:16
 
 int main(int argc, char **argv) {
-    printf("asdf qwer\n");
+    int id;
+    char message[256];
+    while (1) {
+        printf("Input ID: ");
+        scanf("%d", &id);
+        fgetc(stdin);
+        printf("Input message: ");
+        fgets(message, 256, stdin);
+        printf  (  "(%d) Sent message %s\n", id, message);
 
-    for (int i = 0; i < 10; i++) {
-        printf("i=%d\n", i);
     }
-
+    
 	return 0;
 }
 
