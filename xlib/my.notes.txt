@@ -7,3 +7,7 @@ Composite Overlay Window
 
 from man XComposite(3)
 
+echo $DISPLAY
+e $DISPLAY
+outputs   ':0'
+
