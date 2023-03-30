@@ -12,12 +12,12 @@ int main(int argc, char **argv) {
     printf("dim13_org/01openCloseConnection \n");
     
     #include <X11/Xlib.h>
-    Display* display;
 
+    Display* display;
     char monitorName[] = ":0"; 
     display = XOpenDisplay(monitorName);
     if (display == NULL) {
-        fprintf(stderr, "Cannot connect to X server %s \n", ":0");
+        printf("Cannot connect to X server %s \n", ":0");
         exit(-1);
     } 
     else {
@@ -33,7 +33,8 @@ int main(int argc, char **argv) {
 
     XCloseDisplay(display);    
     printf("Disconnected from the X server \n");
-
+    
+    //exit(0);
     return 0;
 }
 
