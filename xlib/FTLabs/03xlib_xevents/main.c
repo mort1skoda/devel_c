@@ -73,6 +73,7 @@ main(int argc, char **argv) {
       win  = 
       create_win ( POSX, POSY, WIDTH, HEIGHT, BORDER );
 
+        XStoreName(dpy, win, "03xlib_events");
         XMapWindow           (dpy, win) ;
 
           run();
