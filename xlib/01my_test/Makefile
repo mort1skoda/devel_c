@@ -36,7 +36,7 @@ main.o: main.c $(HEADERS)
 
 c: clean
 clean:
-	rm *.o $(OUT)
+	rm -vf *.o $(OUT)
 
 v: vars
 vars:
