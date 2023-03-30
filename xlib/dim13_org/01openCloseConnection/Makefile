@@ -24,7 +24,7 @@ dbg: $(OUT)
 	gdb --silent $(OUT)
 
 $(OUT): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(OUT) $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(OUT) $(OBJECTS) $(LIBS) $(LIBS)
 
 
 main.o: main.c $(HEADERS)
