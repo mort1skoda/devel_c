@@ -4,56 +4,81 @@
 #include "func2.h"
 #include "func3.h"
 #include "get_string_length.h"
+#include <X11/X.h>
+#include <X11/XKBlib.h>
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <err.h>
 #include <stdio.h>
 #include <stdlib.h>     // getenv(), etc.
 #include <string.h>
-#include <err.h>
 #include <unistd.h>     // sleep(), etc.
 
 // Morty Hawk 2023-03-30 Thu 03:58
+
+#define POSX    500
+#define POSY    500
+#define WIDTH   750
+#define HEIGHT  500
+#define BORDER   25
 
 static Display*  dpy;
 static int       scr;
 static Window    root;
 
-#define POSX    500
-#define POSY    500
-#define WIDTH   500
-#define HEIGHT  500
-#define BORDER   15
-
-int main(int argc, char **argv) {
-
+static Window  
+create_win ( int x, int y, int w, int h, int b ) {
     Window win;
+    XSetWindowAttributes xwa;
+
+    xwa.background_pixel = WhitePixel (dpy ,scr);
+    xwa.border_pixel     = BlackPixel (dpy, scr);
+    xwa.event_mask       = ButtonPress;
+
+    win = 
+    XCreateWindow (
+        dpy, root, x, y, w, h, b,
+        DefaultDepth(dpy, scr),
+        InputOutput, DefaultVisual(dpy, scr),
+        CWBackPixel | CWBorderPixel | CWEventMask,
+        &xwa
+    );
+    return win;
+}
+
+void
+run() {
     XEvent ev;
 
+    while (XNextEvent(dpy, &ev) == 0) {
+        switch (ev.type) {
+            case ButtonPress:
+                return;
+        }
+    }
+}
+
+
+int
+main(int argc, char **argv) {
+
+    Window win;
+
     if ( (dpy = XOpenDisplay(NULL) ) == NULL )
-        err(1, "Can't open display");
+        errx(1, "Can't open display");
 
     scr  = DefaultScreen (dpy)      ;
     root = RootWindow    (dpy, scr) ;
 
-    win  = 
-    XCreateSimpleWindow  (dpy,
-                         root,
-                         POSX, POSY,
-                         WIDTH, HEIGHT, BORDER,
-                         BlackPixel(dpy, scr),
-                         WhitePixel(dpy, scr)
-    );
+      win  = 
+      create_win ( POSX, POSY, WIDTH, HEIGHT, BORDER );
 
-    XMapWindow           (dpy, win) ;
+        XMapWindow           (dpy, win) ;
 
-    while (XNextEvent(dpy, &ev) == 0) {
+          run();
 
-
-    }
-
-
-
-    XUnmapWindow         (dpy, win) ;
-    XDestroyWindow       (dpy, win) ;
+        XUnmapWindow         (dpy, win) ;
+      XDestroyWindow       (dpy, win) ;
     XCloseDisplay        (dpy)      ;
 
     return 0;
